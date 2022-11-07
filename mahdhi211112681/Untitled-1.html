@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let show = function (data) {
+            let arr = JSON.parse(data);
+            arr = arr[0];
+            document.getElemenById("gambar").src = arr.download_url;
+            document.getElemenById("author").innerHTML = arr.author;
+        }   
+        let load = function () {
+            let link ="https://piscum.photos/v2/list?page=2&Limit=1";
+            let xhr;
+            xhr = new XMLHttpRequest();
+            try {
+                xhr = new XMLHttpRequest();
+                if (!xhr) return -1;
+        
+                xhr.onereadystatechane = function () {
+                    if (xhr.readyState === 4&& xhr.status ===200) {
+                        show(xhr.responseText);
+                    }
+                };
+                xhr.open('GET',link);
+                xhr.send();
+            }
+            catch (e) {
+                console.log(e)
+            }   
+        }
+        load();
+    </script>
+</body>
+</html>
